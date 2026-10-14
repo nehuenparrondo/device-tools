@@ -35,12 +35,14 @@ export function useScanner() {
     }
   }
   function reset() {
+    if (action.isRunning()) return;
     locked.current = false;
     setResult(null);
     setSaved(false);
     setScanError(null);
     setNote('');
     setTags('');
+    setTorch(false);
   }
   function save() {
     void action.run(async () => {

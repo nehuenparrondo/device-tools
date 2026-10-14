@@ -5,10 +5,19 @@ Aplicación académica de React Native para explorar cámara, QR/códigos de bar
 ## Repositorio y APK
 
 - [Repositorio público en GitHub](https://github.com/nehuenparrondo/device-tools).
-- [Descargar APK Android ARM64 1.0.0](https://expo.dev/artifacts/eas/yb2ArRcBKyXg7VUj2FsK5N044nMezjTCuau3rqCy1G8.apk).
-- [Estado de la compilación EAS](https://expo.dev/accounts/elpepoestangod/projects/device-tools/builds/072fd548-9e37-4714-b2d8-9bde716794d4).
+- [APK actual, compilación y huella del archivo](docs/apk-delivery.md).
+- [Informe de correcciones y pruebas 1.0.1](docs/regression-1.0.1.md).
 
-El APK está compilado y descargado; la prueba física sigue pendiente. No necesita Expo Go ni el servidor de desarrollo. Solo es compatible con Android ARM64. Instrucciones y huella SHA-256 en [docs/apk-delivery.md](docs/apk-delivery.md).
+Para descargar la aplicación desde Expo, abrir [la compilación 1.0.1 terminada](https://expo.dev/accounts/elpepoestangod/projects/device-tools/builds/2c97b3cf-e653-4f9c-a8c3-2379e39d5a42). En **Build artifact**, abrir el menú de tres puntos y elegir **Download build**. **Install** muestra el QR para instalarla en Android. El APK no se instala en iPhone ni Windows; para iPhone usar Expo Go. Para descargar el código fuente, usar **Code → Download ZIP** en GitHub o el comando de clonado siguiente.
+
+### Nueva paleta 1.0.1 (vista web)
+
+![Inicio claro con paleta marfil, petróleo y cobre](docs/screenshots/web-1.0.1-clara.png)
+![Inicio oscuro con paleta grafito y verde](docs/screenshots/web-1.0.1-oscura.png)
+
+Estas capturas muestran el diseño web; no constituyen prueba de hardware ni de instalación del APK.
+
+La versión de trabajo es 1.0.1, con cámara corregida y nueva paleta marfil, grafito, verde petróleo y cobre. El APK es para Android ARM64 y no necesita Expo Go ni servidor de desarrollo. Su compilación y la validación física se registran por separado en [docs/apk-delivery.md](docs/apk-delivery.md); el APK 1.0.0 anterior no contiene las correcciones.
 
 Para descargar el código en otra PC:
 
@@ -19,9 +28,9 @@ npm ci
 npm start
 ```
 
-La revisión del 12 de octubre mantuvo TypeScript, lint, formato y 13 pruebas aprobadas; Expo ahora recomienda cinco actualizaciones de parche. Se conservan las versiones del APK existente. Ver [informe de verificación](docs/verification-report.md).
+La revisión del 13 de octubre aprobó TypeScript, lint, formato, 35 pruebas y las 21 comprobaciones de Expo Doctor. Se aplicaron los cinco parches compatibles pendientes. El usuario confirmó que las fotografías y la verificación con código funcionan en su iPhone con Expo Go. Esto no sustituye las pruebas del APK Android ni una validación real de Face ID. Ver [informe de correcciones](docs/regression-1.0.1.md).
 
-**Versiones verificadas el 7 de octubre de 2026:** Expo SDK 57.0.27, React Native 0.86.3, React 19.2.3, Expo Router 57.0.25 y TypeScript 6.0.3. SDK 57 es la versión estable utilizada; no se usan paquetes del SDK 58 beta. Véase el [anuncio oficial de SDK 57](https://expo.dev/changelog/sdk-57). Las versiones exactas están fijadas en package-lock.json.
+**Versiones verificadas el 13 de octubre de 2026:** Expo SDK 57.0.28, React Native 0.86.3, React 19.2.3, Expo Router 57.0.26 y TypeScript 6.0.3. Se conserva SDK 57 estable. Véase el [anuncio oficial de SDK 57](https://expo.dev/changelog/sdk-57). Las versiones exactas están fijadas en package-lock.json.
 
 ## Inicio rápido en esta PC
 
@@ -93,6 +102,8 @@ Los permisos y textos de iOS están configurados en app.json y los plugins. No s
 | Permisos, package e ícono de esta app            | Configuración del contenedor Expo Go  | Configuración propia real                  | No aplica                              |
 
 Expo Go no demuestra que los permisos del APK estén configurados correctamente. Las pruebas nativas y la instalación final deben realizarse sobre el APK propio. Consultá la [documentación de development builds](https://docs.expo.dev/develop/development-builds/introduction/) y la [limitación de Face ID](https://docs.expo.dev/versions/v57.0.0/sdk/local-authentication/).
+
+En un iPhone con Face ID dentro de Expo Go, Identidad y el historial ofrecen **verificación con el código del sistema**, si está configurado. Esta alternativa exige autenticación de iOS: no es un acceso libre ni se presenta como Face ID. En una compilación propia con el permiso configurado se conserva la autenticación biométrica. No hace falta una cuenta Apple Developer para esta alternativa de Expo Go; Face ID real sí requiere un binario iOS propio.
 
 ## Arquitectura y árbol real
 
@@ -195,7 +206,7 @@ npx expo-doctor
 
 O todo junto: `npm run check`.
 
-Las 13 pruebas automatizadas verifican validación, URL segura, migraciones reales de SQLite, claves, restricciones, triggers, parámetros, cascada y rollback, incluyendo el helper transaccional usado por la app. No simulan sensores ni sustituyen la prueba física. La generación de bundles se verifica con:
+Las 35 pruebas automatizadas verifican validación, URL segura, migraciones SQLite, restricciones, parámetros, cascada, rollback, sesiones de cámara, captura, autenticación según entorno, ciclo de vida iOS, tiempos de espera y contraste de ambas paletas. No equivalen a pruebas de sensores ni sustituyen la instalación física. La generación de bundles se verifica con:
 
 ```powershell
 npx expo export --platform android --output-dir dist/android

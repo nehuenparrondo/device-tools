@@ -49,11 +49,13 @@ export async function getToolAvailability(): Promise<Record<string, Availability
   const biometrics = checks[3];
   state.biometrics =
     biometrics?.status === 'fulfilled'
-      ? biometrics.value.available
-        ? 'available'
-        : biometrics.value.hardware
-          ? 'pending'
-          : 'unavailable'
+      ? biometrics.value.mode === 'device-passcode'
+        ? 'limited'
+        : biometrics.value.available
+          ? 'available'
+          : biometrics.value.hardware
+            ? 'pending'
+            : 'unavailable'
       : 'error';
   return state;
 }

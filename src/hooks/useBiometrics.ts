@@ -41,14 +41,17 @@ export function useBiometrics() {
   const verify = useCallback(async () => {
     const current = generation.current;
     if (!active) throw new Error('Volvé a la pantalla para autenticarte.');
-    await authenticateIdentity();
+    const mode = await authenticateIdentity();
     if (current !== generation.current)
       throw new Error('La sesión cambió. Autenticate nuevamente.');
+    return mode;
   }, [active]);
   function authenticate() {
     void action.run(async () => {
-      await verify();
-      return 'Identidad verificada correctamente.';
+      const mode = await verify();
+      return mode === 'device-passcode'
+        ? 'Identidad verificada con el código del iPhone. No se utilizó Face ID.'
+        : 'Identidad verificada con biometría.';
     });
   }
   return {

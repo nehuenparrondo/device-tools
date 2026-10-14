@@ -22,7 +22,7 @@ import type { Removable } from '@/types/components';
 import { useActiveScreen } from './useActiveScreen';
 import { useAsyncAction } from './useAsyncAction';
 export function useExtras() {
-  const active = useActiveScreen();
+  const active = useActiveScreen(true);
   const [snapshot, setSnapshot] = useState<DeviceSnapshot | null>(null);
   const [text, setText] = useState('Hola, esta es una prueba de Device Tools.');
   const [brightness, setBrightness] = useState<number | null>(null);
@@ -105,28 +105,47 @@ export function useExtras() {
       if (originalBrightness.current === null) {
         const original = await readBrightness();
         if (session !== lifecycle.current) return;
+        const system =
+          Platform.OS === 'android' ? await Brightness.isUsingSystemBrightnessAsync() : false;
+        if (session !== lifecycle.current) return;
         originalBrightness.current = original;
-        if (Platform.OS === 'android')
-          originalSystemBrightness.current = await Brightness.isUsingSystemBrightnessAsync();
+        originalSystemBrightness.current = system;
       }
       if (session !== lifecycle.current) return;
+      const original = originalBrightness.current;
+      const system = originalSystemBrightness.current;
       await setAppBrightness(value);
+      if (session !== lifecycle.current) {
+        if (original !== null) {
+          if (Platform.OS === 'android' && system) await Brightness.restoreSystemBrightnessAsync();
+          else await Brightness.setBrightnessAsync(original);
+        }
+        return;
+      }
       setBrightness(value);
       return 'Brillo de la app actualizado. Se restaura al salir.';
     });
   }
   function getBrightness() {
     void action.run(async () => {
-      setBrightness(await readBrightness());
+      const session = lifecycle.current;
+      const value = await readBrightness();
+      if (session === lifecycle.current) setBrightness(value);
     });
   }
   function gallery() {
     void action.run(async () => {
       if (!database.ready)
         throw new Error(database.error ?? 'La base de datos todavía se está preparando.');
+      const session = lifecycle.current;
       const selected = await pickPhoto();
+      if (session !== lifecycle.current) return;
       if (!selected) return 'Selección cancelada.';
       const permanent = await persistPhoto(selected);
+      if (session !== lifecycle.current) {
+        removePrivatePhoto(permanent.uri);
+        return;
+      }
       try {
         await databaseService.save({
           kind: 'photo',
@@ -157,7 +176,8 @@ export function useExtras() {
       }),
     speak: () =>
       void action.run(async () => {
-        await speak(text);
+        const session = lifecycle.current;
+        await speak(text, () => session === lifecycle.current);
         return 'Lectura finalizada.';
       }),
     stopSpeech: () => void stopSpeech().catch(() => undefined),

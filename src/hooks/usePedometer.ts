@@ -7,7 +7,7 @@ import { getErrorMessage } from '@/utils/formatters';
 import { useActiveScreen } from './useActiveScreen';
 import type { SensorStatus } from './useLiveSensor';
 export function usePedometer(enabled: boolean) {
-  const active = useActiveScreen();
+  const active = useActiveScreen(true);
   const [steps, setSteps] = useState(0);
   const [status, setStatus] = useState<SensorStatus>('stopped');
   const [error, setError] = useState<string | null>(null);

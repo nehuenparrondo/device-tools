@@ -19,11 +19,10 @@ export function ScrollToTopButton() {
   }, [opacity, visible]);
   return (
     <Animated.View
-      pointerEvents={visible ? 'auto' : 'none'}
       accessibilityElementsHidden={!visible}
       aria-hidden={!visible}
       importantForAccessibility={visible ? 'auto' : 'no-hide-descendants'}
-      style={{ opacity }}
+      style={{ opacity, pointerEvents: visible ? 'auto' : 'none' }}
     >
       <IconButton icon="arrow-up" label="Volver al inicio" onPress={() => context?.scrollToTop()} />
     </Animated.View>

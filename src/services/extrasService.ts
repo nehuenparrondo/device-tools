@@ -64,10 +64,14 @@ export async function setAppBrightness(value: number): Promise<void> {
     throw new Error('Brillo: no disponible en esta plataforma.');
   await Brightness.setBrightnessAsync(Math.max(0, Math.min(1, value)));
 }
-export async function speak(text: string): Promise<void> {
+export async function speak(
+  text: string,
+  shouldContinue: () => boolean = () => true,
+): Promise<void> {
   if (!text.trim() || text.length > 500)
     throw new Error('Escribí un texto de entre 1 y 500 caracteres.');
   await Speech.stop();
+  if (!shouldContinue()) return;
   await new Promise<void>((resolve, reject) =>
     Speech.speak(text.trim(), {
       language: 'es-AR',

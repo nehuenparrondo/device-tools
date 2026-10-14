@@ -5,6 +5,7 @@ import type { Availability } from '@/types/components';
 import { AppText } from './AppText';
 const LABELS = {
   available: 'Disponible',
+  limited: 'Disponible con código',
   pending: 'Permiso pendiente',
   unavailable: 'No disponible',
   error: 'Error',
@@ -18,10 +19,14 @@ export function StatusBadge({ status }: { status: Availability }) {
         style={{
           color:
             status === 'available'
-              ? colors.accent
-              : status === 'error'
-                ? colors.danger
-                : colors.muted,
+              ? colors.primary
+              : status === 'limited'
+                ? colors.accent
+                : status === 'pending'
+                  ? colors.warning
+                  : status === 'error'
+                    ? colors.danger
+                    : colors.muted,
         }}
       >
         {LABELS[status]}

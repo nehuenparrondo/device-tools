@@ -3,7 +3,7 @@ export interface PageProps {
   title: string;
   subtitle: string;
 }
-export type Availability = 'available' | 'pending' | 'unavailable' | 'error';
+export type Availability = 'available' | 'limited' | 'pending' | 'unavailable' | 'error';
 export interface SensorData {
   x: number;
   y: number;

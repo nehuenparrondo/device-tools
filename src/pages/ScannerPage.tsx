@@ -54,11 +54,26 @@ export function ScannerPage(props: PageProps) {
                 busy={scanner.busy}
                 onPress={scanner.save}
               />
-              <AppButton label="Copiar contenido" secondary onPress={scanner.copy} />
+              <AppButton
+                label="Copiar contenido"
+                secondary
+                disabled={scanner.busy}
+                onPress={scanner.copy}
+              />
               {getSafeUrl(scanner.result.content) && (
-                <AppButton label="Abrir enlace" secondary onPress={scanner.open} />
+                <AppButton
+                  label="Abrir enlace"
+                  secondary
+                  disabled={scanner.busy}
+                  onPress={scanner.open}
+                />
               )}
-              <AppButton label="Escanear otro código" secondary onPress={scanner.reset} />
+              <AppButton
+                label="Escanear otro código"
+                secondary
+                disabled={scanner.busy}
+                onPress={scanner.reset}
+              />
             </Card>
           ) : mountError ? (
             <StatePanel

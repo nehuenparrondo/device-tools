@@ -1,5 +1,7 @@
 # Informe de verificación
 
+**Actualización 1.0.1 del 13/10/2026:** consultar [regression-1.0.1.md](regression-1.0.1.md). Se aplicaron los cinco parches, se corrigieron cámara/autenticación y aprobaron 35 pruebas y Expo Doctor 21/21. El usuario confirmó las fotos y el código de iOS. Los apartados siguientes conservan el historial de 1.0.0 y no describen el estado actual de dependencias.
+
 Fecha: 7 de octubre de 2026. Proyecto: Device Tools 1.0.0.
 
 ## Controles locales aprobados

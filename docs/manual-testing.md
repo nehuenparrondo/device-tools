@@ -2,6 +2,21 @@
 
 Registrar fecha, modelo, versión de Android/iOS, tipo de ejecución (Expo Go, development build o preview APK), pasos, resultado y captura. La validación final requiere el APK instalado en un Android físico.
 
+## Regresiones obligatorias de 1.0.1
+
+- Alternar frontal/trasera 20 veces, esperar cada inicio y capturar en ambas. Cambiar pestaña, volver y repetir.
+- Capturar, guardar, tomar otra foto y volver a capturar; comprobar que no se permite resetear durante un guardado.
+- Bloquear/desbloquear el teléfono y comprobar que se remonta la cámara; probar error de montaje/reintento.
+- En Expo Go iPhone con Face ID: debe decir "Verificar con código del iPhone", solicitar verificación de iOS y no afirmar que se utilizó Face ID.
+- Cancelar el código o la huella: no debe desbloquear historial. Salir del historial y pasar a background: debe bloquearse de nuevo.
+- En compilación propia iOS: comprobar Face ID con permiso configurado; no marcarlo aprobado con un resultado de código.
+- Primer permiso GPS/movimiento: conceder y verificar que la solicitud continúa; bloquear el teléfono debe detener sesiones.
+- Cambiar brillo y salir inmediatamente, incluso durante la operación: se debe recuperar el brillo original.
+- Elegir una imagen y salir: no deben importarse resultados de una sesión cancelada.
+- Probar ambos temas, textos grandes, portrait/landscape y navegación sin desbordes.
+
+Confirmaciones recibidas del usuario el 13/10/2026 en iPhone con Expo Go: funcionan las fotografías tras cambiar de cámara, verificación con código, guardado de foto y QR en Historial, GPS, sensores y persistencia después de cerrar/reabrir. Modelo/iOS y número de repeticiones no informados. Permisos denegados, galería, brillo, voz y APK Android siguen sin confirmación; no se marcan como aprobados.
+
 | ID  | Caso                                                        | Resultado esperado                                                           |
 | --- | ----------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | P01 | Instalación y primera apertura                              | Inicia sin cierre inesperado ni solicitudes anticipadas de cámara/GPS        |

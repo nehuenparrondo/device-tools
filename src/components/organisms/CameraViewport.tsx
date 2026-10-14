@@ -4,6 +4,7 @@ import type { ReactNode, RefObject } from 'react';
 import { StyleSheet, View } from 'react-native';
 interface Props {
   cameraRef?: RefObject<CameraView | null>;
+  sessionId?: number;
   facing?: 'front' | 'back';
   flash?: boolean;
   torch?: boolean;
@@ -14,6 +15,7 @@ interface Props {
 }
 export function CameraViewport({
   cameraRef,
+  sessionId = 0,
   facing = 'back',
   flash = false,
   torch = false,
@@ -25,6 +27,7 @@ export function CameraViewport({
   return (
     <View style={styles.container}>
       <CameraView
+        key={`${sessionId}-${facing}`}
         ref={cameraRef}
         style={StyleSheet.absoluteFill}
         facing={facing}

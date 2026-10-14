@@ -46,9 +46,9 @@ function AppShell() {
       {error && <AppText accessibilityLiveRegion="polite">{error}</AppText>}
       {ready && fontsLoaded && (
         <View
-          pointerEvents="box-none"
           style={[
             styles.floating,
+            { pointerEvents: 'box-none' },
             {
               bottom: Math.max(72, 48 + 24 * fontScale) + insets.bottom + 16,
               right: Math.max(16, insets.right + 8),

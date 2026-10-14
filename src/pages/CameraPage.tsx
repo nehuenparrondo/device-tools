@@ -1,5 +1,4 @@
 // src/pages/CameraPage.tsx — Compone captura, previsualización y guardado de fotografías.
-import { useState } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppButton } from '@/components/atoms/AppButton';
@@ -21,7 +20,6 @@ export function CameraPage(props: PageProps) {
   const { permission, requestPermission, supported } = useCameraPermission();
   const active = useActiveScreen();
   const { colors } = useTheme();
-  const [mountError, setMountError] = useState<string | null>(null);
   if (!supported)
     return (
       <ScreenContainer {...props}>
@@ -78,7 +76,12 @@ export function CameraPage(props: PageProps) {
             busy={camera.busy}
             onPress={camera.gallery}
           />
-          <AppButton label="Tomar otra foto" secondary onPress={camera.reset} />
+          <AppButton
+            label="Tomar otra foto"
+            secondary
+            disabled={camera.busy}
+            onPress={camera.reset}
+          />
           {camera.message && <AppText accessibilityLiveRegion="polite">{camera.message}</AppText>}
           {camera.failed && (
             <AppButton
@@ -98,20 +101,21 @@ export function CameraPage(props: PageProps) {
       <AppText variant="subtitle" accessibilityRole="header">
         {props.title}
       </AppText>
-      {mountError ? (
+      {camera.mountError ? (
         <StatePanel
           title="No se pudo abrir la cámara"
-          message={mountError}
-          action={() => setMountError(null)}
+          message={camera.mountError}
+          action={camera.retry}
         />
       ) : active ? (
         <CameraViewport
           cameraRef={camera.cameraRef}
+          sessionId={camera.sessionId}
           facing={camera.facing}
           flash={camera.flash}
           torch={camera.torch}
-          onReady={() => camera.setReady(true)}
-          onError={setMountError}
+          onReady={camera.onReady}
+          onError={camera.onMountError}
         >
           <CameraControls
             ready={camera.ready}

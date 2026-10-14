@@ -17,7 +17,7 @@ export function useLiveSensor<Measurement>(
   enabled: boolean,
   interval: number,
 ) {
-  const active = useActiveScreen();
+  const active = useActiveScreen(true);
   const [data, setData] = useState<Measurement | null>(null);
   const [status, setStatus] = useState<SensorStatus>('stopped');
   const [error, setError] = useState<string | null>(null);
@@ -39,6 +39,7 @@ export function useLiveSensor<Measurement>(
         if (!canceled) setStatus('unavailable');
         return;
       }
+      if (canceled) return;
       const current = await sensor.getPermissionsAsync();
       if (canceled) return;
       const permission =

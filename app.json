@@ -2,7 +2,7 @@
   "expo": {
     "name": "Device Tools",
     "slug": "device-tools",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "default",
     "scheme": "devicetools",
     "icon": "./assets/icon.png",
@@ -11,6 +11,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.nehuenparrondo.devicetools",
       "infoPlist": {
+        "NSFaceIDUsageDescription": "Permití verificar tu identidad y proteger el historial.",
         "NSMotionUsageDescription": "Device Tools usa sensores de movimiento y pasos cuando activás la herramienta."
       }
     },
@@ -39,7 +40,7 @@
         "android.permission.SYSTEM_ALERT_WINDOW"
       ],
       "adaptiveIcon": {
-        "backgroundColor": "#101A2B",
+        "backgroundColor": "#181E1B",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
@@ -101,7 +102,7 @@
         {
           "image": "./assets/splash-icon.png",
           "imageWidth": 180,
-          "backgroundColor": "#101A2B"
+          "backgroundColor": "#181E1B"
         }
       ],
       "expo-sqlite"

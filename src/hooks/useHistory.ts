@@ -62,7 +62,7 @@ export function useHistory() {
     });
   }
   function bypass() {
-    if (active && biometrics.capability && !biometrics.capability.available) setUnlocked(true);
+    if (active && biometrics.capability?.canBypass) setUnlocked(true);
   }
   function remove(record: HistoryRecord) {
     void action.run(async () => {

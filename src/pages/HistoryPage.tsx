@@ -53,12 +53,15 @@ export function HistoryPage(props: PageProps) {
               la app a segundo plano.
             </AppText>
             {history.biometrics.capability?.available ? (
-              <AppButton
-                label="Desbloquear con biometría"
-                busy={history.busy}
-                onPress={history.unlock}
-              />
-            ) : history.biometrics.capability ? (
+              <>
+                <AppText>{history.biometrics.capability.notice}</AppText>
+                <AppButton
+                  label={history.biometrics.capability.actionLabel}
+                  busy={history.busy}
+                  onPress={history.unlock}
+                />
+              </>
+            ) : history.biometrics.capability?.canBypass ? (
               <>
                 <AppText>
                   No hay biometría registrada. El dispositivo debe estar bajo tu control para
@@ -67,7 +70,10 @@ export function HistoryPage(props: PageProps) {
                 <AppButton label="Continuar sin biometría" onPress={history.bypass} />
               </>
             ) : (
-              <AppButton label="Comprobar soporte" onPress={history.biometrics.refresh} />
+              <>
+                <AppText>{history.biometrics.capability?.notice}</AppText>
+                <AppButton label="Comprobar soporte" onPress={history.biometrics.refresh} />
+              </>
             )}
           </Card>
         )

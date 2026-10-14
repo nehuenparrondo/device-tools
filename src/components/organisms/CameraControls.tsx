@@ -31,18 +31,18 @@ export function CameraControls({
       contentContainerStyle={styles.controls}
     >
       <AppButton label="Tomar foto" disabled={!ready} busy={busy} onPress={onCapture} />
-      <AppButton label="Cambiar cámara" secondary disabled={busy} onPress={onFlip} />
+      <AppButton label="Cambiar cámara" secondary disabled={busy || !ready} onPress={onFlip} />
       <AppButton
         label={flash ? 'Flash encendido' : 'Flash apagado'}
         secondary
-        disabled={busy}
+        disabled={busy || !ready}
         onPress={onFlash}
       />
       {facing === 'back' && (
         <AppButton
           label={torch ? 'Apagar linterna' : 'Encender linterna'}
           secondary
-          disabled={busy}
+          disabled={busy || !ready}
           onPress={onTorch}
         />
       )}

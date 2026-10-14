@@ -2,6 +2,30 @@
 
 El proyecto utiliza SemVer: MAJOR para cambios incompatibles, MINOR para funcionalidades compatibles y PATCH para correcciones.
 
+## [1.0.1] - 2026-10-13
+
+### Corregido
+
+- Cambio frontal/trasera con montaje nuevo y eventos de cámara asociados a su sesión; ya no queda bloqueada la captura esperando un evento que no vuelve a emitirse.
+- Reintento de cámara, descarte de respuestas antiguas, captura con timeout y validación de dimensiones/URI.
+- Detección real de Expo Go mediante isRunningInExpoGo; una compilación de desarrollo propia no se confunde con Expo Go.
+- Código seguro de iOS como alternativa explícita al Face ID no soportado por Expo Go, sin acceso libre al historial ni falsa afirmación de biometría.
+- Permisos iOS durante inactive conservados; segundo plano y pérdida de foco detienen hardware y bloquean historial.
+- Límites de espera GPS/geocodificación, restauración de brillo tardío, cancelación de importaciones y voz al salir, y bloqueo de resets durante guardado.
+- Advertencia web de pointerEvents eliminada y cinco parches compatibles de Expo aplicados.
+
+### Cambiado
+
+- Nueva identidad visual marfil/grafito/petróleo/cobre, panel de inicio destacado, estados diferenciados y splash coordinado.
+- 35 pruebas automatizadas, incluyendo contraste AA 4.5:1 de los pares de texto comprobados.
+- APK preview con incremento de versionCode para actualizar sin borrar los datos existentes.
+
+### Verificado
+
+- TypeScript, lint, formato, 35 pruebas y Expo Doctor 21/21.
+- El usuario confirmó fotos tras cambiar de cámara y verificación con código en su iPhone con Expo Go.
+- Face ID real y prueba completa del APK Android continúan siendo comprobaciones físicas distintas.
+
 ## Documentación de publicación - 2026-10-12
 
 - Repositorio GitHub público de entrega: nehuenparrondo/device-tools.

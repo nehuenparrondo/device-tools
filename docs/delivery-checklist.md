@@ -1,5 +1,21 @@
 # Plan de trabajo y checklist de la rúbrica
 
+## Revisión 1.0.1 — 13/10/2026
+
+- [x] Corregir cambio de cámara y eventos de sesiones anteriores.
+- [x] Alternativa segura con código iOS en Expo Go, sin prometer Face ID.
+- [x] Confirmación del usuario: fotografías y verificación con código funcionan en su iPhone.
+- [x] Confirmación adicional del usuario: QR, GPS, sensores e historial persistente funcionan en su iPhone.
+- [x] Nueva paleta marfil/grafito/petróleo/cobre, con contraste comprobado en ambos temas.
+- [x] Cinco parches de Expo aplicados, 35 pruebas y Doctor 21/21.
+- [x] Exportar Android, iOS y web con el código final.
+- [x] Revisar las nueve rutas web, tema persistente, scroll y tamaños responsive.
+- [x] APK final 1.0.1: EAS FINISHED, descargado, estructura ARM64 y SHA-256 comprobados.
+- [ ] Instalar y completar pruebas físicas en Android ARM64.
+- [x] Publicar las correcciones de 1.0.1 en GitHub, con autorización expresa del usuario.
+
+Los checks históricos siguientes describen también el trabajo entregado en 1.0.0; no equivalen a validar hardware nuevo ni Face ID en Expo Go.
+
 ## Etapas
 
 - [x] Leer consigna completa.

@@ -1,7 +1,9 @@
 // src/components/organisms/ScannerGuide.tsx — Marco animado que no intercepta las acciones.
 import { useEffect, useState } from 'react';
 import { Animated, Platform, StyleSheet, View } from 'react-native';
+import { useTheme } from '@/hooks/useTheme';
 export function ScannerGuide() {
+  const { colors } = useTheme();
   const [progress] = useState(() => new Animated.Value(0));
   useEffect(() => {
     const animation = Animated.loop(
@@ -22,11 +24,12 @@ export function ScannerGuide() {
     return () => animation.stop();
   }, [progress]);
   return (
-    <View pointerEvents="none" style={styles.guide}>
+    <View style={styles.guide}>
       <View style={styles.frame}>
         <Animated.View
           style={[
             styles.line,
+            { backgroundColor: colors.heroAccent },
             {
               opacity: progress.interpolate({ inputRange: [0, 1], outputRange: [0.25, 1] }),
               transform: [
@@ -41,6 +44,7 @@ export function ScannerGuide() {
 }
 const styles = StyleSheet.create({
   guide: {
+    pointerEvents: 'none',
     position: 'absolute',
     top: 0,
     bottom: 0,
@@ -60,5 +64,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     overflow: 'hidden',
   },
-  line: { height: 3, backgroundColor: '#74D8BB', width: '100%' },
+  line: { height: 3, width: '100%' },
 });

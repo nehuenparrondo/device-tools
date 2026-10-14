@@ -2,6 +2,7 @@
 import { useIsFocused } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { AppState } from 'react-native';
+import { isScreenActive } from '@/utils/lifecycle';
 export function useActiveScreen(allowSystemPrompt = false) {
   const focused = useIsFocused();
   const [state, setState] = useState(AppState.currentState);
@@ -9,5 +10,5 @@ export function useActiveScreen(allowSystemPrompt = false) {
     const subscription = AppState.addEventListener('change', (state) => setState(state));
     return () => subscription.remove();
   }, []);
-  return focused && (state === 'active' || (allowSystemPrompt && state === 'inactive'));
+  return isScreenActive(focused, state, allowSystemPrompt);
 }

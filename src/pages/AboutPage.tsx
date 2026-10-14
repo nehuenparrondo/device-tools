@@ -9,7 +9,7 @@ export function AboutPage(props: PageProps) {
     <ScreenContainer {...props}>
       <ResponsiveGrid>
         <Card>
-          <AppText variant="subtitle">Device Tools · 1.0.0</AppText>
+          <AppText variant="subtitle">Device Tools · 1.0.1</AppText>
           <AppText>
             Un espacio para explorar las herramientas de tu teléfono y aprender cómo funcionan.
           </AppText>

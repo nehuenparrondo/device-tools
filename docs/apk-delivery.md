@@ -1,6 +1,22 @@
 # Compilación e instalación de entrega
 
-## Identificación
+## Versión actual: 1.0.1
+
+Incluye las correcciones de cámara/identidad/permisos y la nueva paleta. [Compilación final 1.0.1 en EAS](https://expo.dev/accounts/elpepoestangod/projects/device-tools/builds/2c97b3cf-e653-4f9c-a8c3-2379e39d5a42), Android versionCode 3, perfil preview ARM64. Estado **FINISHED**, completada el 14 de octubre de 2026 a las 01:42:29 UTC (13 de octubre, 22:42:29 en UTC−3). El intento intermedio `b45ac979-22ff-407d-b54a-e1a009365533` fue cancelado para incorporar la paleta solicitada, no por un error de compilación.
+
+[Descargar APK Device Tools 1.0.1 ARM64](https://expo.dev/artifacts/eas/L7XM7-Nj4r4iCmCYPZzredZihsBbsgmw9x3wS4MGh20.apk).
+
+La copia descargada contiene manifiesto, recursos, DEX, bundle JavaScript y bibliotecas únicamente para `arm64-v8a`. Tamaño: 55365454 bytes. SHA-256:
+
+```text
+03804A1AA15D4D9A2EACE28AD7463B9FCFFA8522B12FEE9E2C38DEA0535EA938
+```
+
+Esta comprobación de estructura e integridad no sustituye la instalación en Android ni una verificación criptográfica independiente de la firma. EAS informa expiración del artefacto el 28 de octubre de 2026 a las 01:33:13 UTC; conservar la copia local. La prueba física Android sigue pendiente.
+
+**No entregar el APK 1.0.0 como si contuviera estas correcciones.** Los datos del apartado siguiente se conservan solo como referencia histórica.
+
+## Referencia histórica: identificación 1.0.0
 
 - Aplicación: Device Tools 1.0.0.
 - Package Android: `com.nehuenparrondo.devicetools`.
@@ -58,7 +74,7 @@ Para aprobar la entrega, registrar los resultados completos de `docs/manual-test
 
 ```powershell
 cd "C:\Users\parro\OneDrive\Desktop\react-native-tps\device-tools"
-npx eas-cli@latest build:view 072fd548-9e37-4714-b2d8-9bde716794d4
+npx eas-cli@latest build:view 2c97b3cf-e653-4f9c-a8c3-2379e39d5a42
 ```
 
 El APK generado y su prueba física son pasos distintos. No se marcará instalación/hardware como aprobado sin haberlo realizado.

@@ -17,7 +17,7 @@ import { parseTags } from '@/utils/validators';
 import { useActiveScreen } from './useActiveScreen';
 import { useAsyncAction } from './useAsyncAction';
 export function useLocation() {
-  const active = useActiveScreen();
+  const active = useActiveScreen(true);
   const subscription = useRef<Location.LocationSubscription | null>(null);
   const session = useRef(0);
   const [position, setPosition] = useState<LocationData | null>(null);
@@ -54,6 +54,7 @@ export function useLocation() {
       const requestSession = session.current;
       setGpsError(null);
       await requireLocationPermission();
+      if (requestSession !== session.current) return;
       const data = normalizeLocation(await getCurrentPosition());
       if (requestSession !== session.current) return;
       setPosition(data);

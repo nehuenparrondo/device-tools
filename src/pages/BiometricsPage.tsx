@@ -41,23 +41,29 @@ export function BiometricsPage(props: PageProps) {
             Huella o rostro registrado: {biometrics.capability?.enrolled ? 'sí' : 'no'}
           </AppText>
           <AppText>Tipos: {biometrics.capability?.types.join(', ') || 'ninguno'}</AppText>
+          <AppText>{biometrics.capability?.notice}</AppText>
           <AppText muted>
             Android e iOS realizan la verificación. Device Tools recibe solo el resultado, nunca tus
             datos biométricos. El historial se vuelve a bloquear al salir de su pantalla.
           </AppText>
           {biometrics.capability?.available ? (
             <AppButton
-              label="Autenticar identidad"
+              label={biometrics.capability.actionLabel}
               busy={biometrics.busy}
               onPress={biometrics.authenticate}
             />
           ) : (
             <StatePanel
-              title="Biometría no configurada"
-              message="Registrá una huella o rostro en los ajustes del dispositivo. El historial ofrece acceso manual explícito cuando no hay biometría."
+              title="Autenticación no disponible"
+              message={biometrics.capability?.notice ?? 'Actualizá la comprobación de soporte.'}
             />
           )}
-          <AppButton label="Actualizar comprobación" secondary onPress={biometrics.refresh} />
+          <AppButton
+            label="Actualizar comprobación"
+            secondary
+            disabled={biometrics.busy}
+            onPress={biometrics.refresh}
+          />
           <AppButton
             label="Abrir configuración"
             secondary
